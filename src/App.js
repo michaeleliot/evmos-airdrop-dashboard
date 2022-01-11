@@ -3,9 +3,10 @@ import React from 'react';
 import LandingPage from './pages/landing/landing.tsx';
 import DashboardPage from './pages/dashboard/dashboard.tsx';
 import MissionControlPage from './pages/mission control/missionControl.tsx';
+import RektdropRewardsPage from './pages/rektdrop rewards/rektdropRewards.tsx';
 
 function App() {
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(2);
   const [userAddress, setUserAddress] = React.useState('');
   const [userMissions, setUserMissions] = React.useState([]);
 
@@ -27,6 +28,10 @@ function App() {
   }
 
   if (page === 2) {
+    return <RektdropRewardsPage />;
+  }
+
+  if (page === 3) {
     return (
       <DashboardPage userAddress={userAddress} userMissions={userMissions} />
     );
