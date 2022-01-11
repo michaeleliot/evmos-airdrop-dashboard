@@ -7,7 +7,7 @@ interface KeplrWindow extends Window {
 
 declare let window: KeplrWindow;
 
-const connectKeplrWallet = async (): Promise<string | null> => {
+export const connectKeplrWallet = async (): Promise<string | null> => {
   const {keplr, getOfflineSignerOnlyAmino} = window;
 
   console.log('Checking keplr');
@@ -32,5 +32,3 @@ const connectKeplrWallet = async (): Promise<string | null> => {
 
   return null;
 };
-
-export default connectKeplrWallet;

@@ -2,7 +2,7 @@ import './landing.css';
 import '../../index.css';
 import logo from '../../images/logo.svg';
 import walletButton from '../../images/walletButton.svg';
-import connectToKeplr from '../../services/keplr';
+import {connectKeplrWallet} from '../../services/keplr';
 
 export interface LandingPageProps {
   updateKeplrState: (address: string | null) => void;
@@ -12,7 +12,7 @@ export default function LandingPage(props: LandingPageProps) {
   const {updateKeplrState} = props;
 
   async function connectKeplrAndUpdateState() {
-    const address = await connectToKeplr();
+    const address = await connectKeplrWallet();
     updateKeplrState(address);
   }
 
