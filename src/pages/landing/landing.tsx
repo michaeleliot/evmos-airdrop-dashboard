@@ -2,37 +2,19 @@ import './landing.css';
 import '../../index.css';
 import logo from '../../images/logo.svg';
 import walletButton from '../../images/walletButton.svg';
+import connectToKeplr from '../../services/keplr';
 
-export default function LandingPage(props: any) {
-  const {connectKeplrAccount} = props;
+export interface LandingPageProps {
+  updateKeplrState: (address: string | null) => void;
+}
 
-  const connectWallet = async (callback: any) => {
-    const {keplr} = window as any;
-    const {getOfflineSignerOnlyAmino} = window as any;
-    const chainId = 'evmos_9000-2';
+export default function LandingPage(props: LandingPageProps) {
+  const {updateKeplrState} = props;
 
-    console.log('Checking keplr');
-
-    if (!getOfflineSignerOnlyAmino || !keplr) {
-      const error = 'Please install Keplr extension';
-      console.log(error);
-      // TODO: handle error
-      return;
-    }
-
-    await keplr.enable(chainId);
-
-    const offlineSigner = getOfflineSignerOnlyAmino(chainId);
-    const accounts = await offlineSigner.getAccounts();
-
-    if (accounts.length > 0) {
-      connectKeplrAccount(accounts[0].address);
-      return;
-    }
-
-    // TODO: handle error
-    console.log('No accounts found');
-  };
+  async function connectKeplrAndUpdateState() {
+    const address = await connectToKeplr();
+    updateKeplrState(address);
+  }
 
   return (
     <div className="page-base">
@@ -44,7 +26,9 @@ export default function LandingPage(props: any) {
           libero vitae tellus fringilla ultricies. Pellentesque ullamcorper
           felis at tincidunt mattis.
         </p>
-        <div onClick={connectWallet} onKeyDown={connectWallet}>
+        <div
+          onClick={connectKeplrAndUpdateState}
+          onKeyDown={connectKeplrAndUpdateState}>
           <img src={walletButton} alt="Connect Wallet" className="la--wallet" />
         </div>
       </div>
