@@ -114,7 +114,7 @@ function MissionControlGrid(props: any) {
 export default function MissionControlPage(props: any) {
   return (
     <div className="page-base m--page-base">
-      <div className="m--header">Mission Control</div>
+      <div className="page--header">Mission Control</div>
       <MissionControlGrid />
     </div>
   );
