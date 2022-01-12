@@ -1,7 +1,13 @@
 export interface Task {
   id: number;
-  name: string;
+  description: string;
   points: number;
+  reward_category: number;
+  isCompleted: boolean;
+}
+
+export interface MissionsObject {
+  [key: string]: Task[];
 }
 
 export interface AllCompletesMissionsByWallet {
@@ -9,14 +15,6 @@ export interface AllCompletesMissionsByWallet {
   missions: number[];
 }
 
-export interface TaskReturnObject {
-  tasks: Task[];
-}
-
-export interface MissionReturnObject {
+export interface CompletedTasksReturnObject {
   missions: number[];
-}
-
-export interface AllCompletesMissionsByWalletObject {
-  completed: AllCompletesMissionsByWallet;
 }
