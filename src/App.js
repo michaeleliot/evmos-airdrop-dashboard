@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import LandingPage from './pages/landing/landing.tsx';
 import DashboardPage from './pages/dashboard/dashboard.tsx';
 import MissionControlPage from './pages/mission control/missionControl.tsx';
 import RektdropRewardsPage from './pages/rektdrop rewards/rektdropRewards.tsx';
 
+import {getCompletedTasks} from './services/missionsService';
+
 function App() {
   const [page, setPage] = React.useState(2);
   const [userAddress, setUserAddress] = React.useState('');
-  const [userMissions, setUserMissions] = React.useState([]);
+  const [completedTasks, setCompletedTasks] = React.useState([]);
 
   const connectKeplrAccount = address => {
     if (!address) {
@@ -18,6 +20,12 @@ function App() {
     setUserAddress(address);
     setPage(1);
   };
+
+  useEffect(() => {
+    if (userAddress) {
+      setCompletedTasks(await getCompletedTasks(userAddress));
+    }
+  }, [userAddress]);
 
   if (page === 0) {
     return <LandingPage connectKeplrAccount={connectKeplrAccount} />;
@@ -33,7 +41,7 @@ function App() {
 
   if (page === 3) {
     return (
-      <DashboardPage userAddress={userAddress} userMissions={userMissions} />
+      <DashboardPage userAddress={userAddress} userMissions={completedTasks} />
     );
   }
 }
