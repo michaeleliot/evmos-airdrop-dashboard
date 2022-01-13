@@ -1,1 +1,1 @@
-export const apiDomain = 'http://api.hanchon.live';
+export const apiDomain = 'https://api.hanchon.live';
