@@ -1,11 +1,3 @@
-.m--page-base {
-  width: 80vw;
-  margin: 48px auto 48px auto;
-
-  display: flex;
-  flex-direction: column;
-}
-
 .m--grid {
   margin: 36px auto 36px auto;
   width: 100%;
