@@ -56,14 +56,14 @@ function RektdropRewardsGrid(props: any) {
       <div className="r--card--button-container">
         {isComplete && (
           <div
-            className="r--card--point-tag r--card--point-tag-completed"
+            className="card--point-tag card--point-tag-completed"
             style={{marginRight: 8}}>
             Completed
           </div>
         )}
         <div
-          className={`r--card--point-tag ${
-            isComplete && 'r--card--point-tag-completed'
+          className={`card--point-tag ${
+            isComplete && 'card--point-tag-completed'
           }`}>{`${pointCount} PTS`}</div>
       </div>
     </>
@@ -78,7 +78,7 @@ function RektdropRewardsGrid(props: any) {
       rowHeight={200}
       margin={[0, 12]}
       cols={{lg: 4, md: 4, sm: 4, xs: 4}}>
-      <div className="r--card r--card-completed" key="1">
+      <div className="r--card card-completed" key="1">
         {card(
           'Vivamus quis velit nec qugue loborti',
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in odio fermentum, auctor dui pretium, commodo neque.',
@@ -116,7 +116,7 @@ function RektdropRewardsGrid(props: any) {
 
 export default function RektdropRewardsPage(props: any) {
   return (
-    <div className="page-base r--page-base">
+    <div className="page-base page-content">
       <div className="page--header">Rektdrop Rewards</div>
       <RektdropRewardsGrid />
     </div>
