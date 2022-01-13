@@ -1,3 +1,16 @@
+/* Duplicate of t--flex-row */
+/* But modified for mobile */
+.t--header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.t--view-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .t--view-button {
   display: flex;
   flex-direction: row;
@@ -132,4 +145,15 @@
   font-weight: 700;
   font-size: 11px;
   color: #000;
+}
+
+/* Mobile Phone CSS */
+@media screen and (max-width: 480px) {
+  .t--header {
+    flex-direction: column;
+  }
+
+  .t--view-buttons {
+    margin-top: 12px;
+  }
 }

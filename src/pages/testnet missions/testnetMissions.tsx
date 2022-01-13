@@ -133,10 +133,10 @@ function TestnetMissionsGrid(props: any) {
 
 export default function TestnetMissionsPage(props: any) {
   return (
-    <div className="page-base page-content">
-      <div className="t--flex-row">
+    <div className="page-content">
+      <div className="t--header">
         <div className="page--header">Testnet Missions</div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
+        <div className="t--view-buttons">
           <div className="t--view-button">
             <div className="t--view-button--text">Sort By</div>
             <img src={arrowdown} alt="Down" className="t--view-button--icon" />
