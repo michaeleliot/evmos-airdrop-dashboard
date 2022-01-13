@@ -9,7 +9,7 @@ import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 import NavigationBar from './components/navigation bar/navigationBar';
 
 function App() {
-  const [page, setPage] = React.useState(3);
+  const [page, setPage] = React.useState(0);
   const [userAddress, setUserAddress] = React.useState('');
   const [userMissions, setUserMissions] = React.useState([]);
 
@@ -50,14 +50,16 @@ function App() {
 
   return (
     <div className="page-base">
-      <NavigationBar
-        pointCount={150}
-        selectedPage={page}
-        address={userAddress}
-        didSelectPage={(newPage: number) => {
-          setPage(newPage);
-        }}
-      />
+      {page !== 0 && (
+        <NavigationBar
+          pointCount={150}
+          selectedPage={page}
+          address={userAddress}
+          didSelectPage={(newPage: number) => {
+            setPage(newPage);
+          }}
+        />
+      )}
       {pageContent()}
     </div>
   );
