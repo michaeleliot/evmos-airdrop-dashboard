@@ -18,3 +18,12 @@ export interface AllCompletesMissionsByWallet {
 export interface CompletedTasksReturnObject {
   missions: number[];
 }
+
+export interface LeaderBoardEntry {
+  walletAddress: string;
+  points: number;
+}
+
+export interface LeaderboardReturnObject {
+  leaderboard: LeaderBoardEntry[];
+}
