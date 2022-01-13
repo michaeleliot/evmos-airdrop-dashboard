@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import LandingPage from './pages/landing/landing';
 import DashboardPage from './pages/dashboard/dashboard';
@@ -8,10 +8,12 @@ import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 
 import NavigationBar from './components/navigation bar/navigationBar';
 
+import {getCompletedTasks} from './services/missionsService';
+
 function App() {
   const [page, setPage] = React.useState(0);
   const [userAddress, setUserAddress] = React.useState('');
-  const [userMissions, setUserMissions] = React.useState([]);
+  const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
 
   const updateKeplrState = (address: string | null): void => {
     if (!address) {
@@ -21,6 +23,12 @@ function App() {
     setUserAddress(address);
     setPage(3);
   };
+
+  useEffect(() => {
+    if (userAddress) {
+      getCompletedTasks(userAddress).then(tasks => setCompletedTasks(tasks));
+    }
+  }, [userAddress]);
 
   const pageContent = () => {
     if (page === 0) {
@@ -41,7 +49,10 @@ function App() {
 
     if (page === 4) {
       return (
-        <DashboardPage userAddress={userAddress} userMissions={userMissions} />
+        <DashboardPage
+          userAddress={userAddress}
+          userMissions={completedTasks}
+        />
       );
     }
 
