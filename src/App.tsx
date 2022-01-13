@@ -1,19 +1,19 @@
 import React from 'react';
 
-import LandingPage from './pages/landing/landing.tsx';
-import DashboardPage from './pages/dashboard/dashboard.tsx';
-import MissionControlPage from './pages/mission control/missionControl.tsx';
-import RektdropRewardsPage from './pages/rektdrop rewards/rektdropRewards.tsx';
-import TestnetMissionsPage from './pages/testnet missions/testnetMissions.tsx';
+import LandingPage from './pages/landing/landing';
+import DashboardPage from './pages/dashboard/dashboard';
+import MissionControlPage from './pages/mission control/missionControl';
+import RektdropRewardsPage from './pages/rektdrop rewards/rektdropRewards';
+import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 
-import NavigationBar from './components/navigation bar/navigationBar.tsx';
+import NavigationBar from './components/navigation bar/navigationBar';
 
 function App() {
   const [page, setPage] = React.useState(3);
   const [userAddress, setUserAddress] = React.useState('');
   const [userMissions, setUserMissions] = React.useState([]);
 
-  const connectKeplrAccount = address => {
+  const updateKeplrState = (address: string | null): void => {
     if (!address) {
       // TODO: error handling
       return;
@@ -24,7 +24,7 @@ function App() {
 
   const pageContent = () => {
     if (page === 0) {
-      return <LandingPage connectKeplrAccount={connectKeplrAccount} />;
+      return <LandingPage updateKeplrState={updateKeplrState} />;
     }
 
     if (page === 1) {
@@ -54,7 +54,7 @@ function App() {
         pointCount={150}
         selectedPage={page}
         address={userAddress}
-        didSelectPage={newPage => {
+        didSelectPage={(newPage: number) => {
           setPage(newPage);
         }}
       />
