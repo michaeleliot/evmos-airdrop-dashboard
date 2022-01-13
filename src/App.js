@@ -21,7 +21,7 @@ function App() {
     setPage(1);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (userAddress) {
       setCompletedTasks(await getCompletedTasks(userAddress));
     }

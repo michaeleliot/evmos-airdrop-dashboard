@@ -79,7 +79,7 @@ function DashboardGrid(props: any) {
         <div className="d--card" key={mission.id}>
           <div className="d--card--tag">15 EVMOS</div>
           <img src={cardimage} alt="Card" />
-          <h3 className="d--card--title">{mission.task}</h3>
+          <h3 className="d--card--title">{mission.description}</h3>
           <div className="d--row">
             {statusForCard(mission.id, mission.points)}
           </div>
