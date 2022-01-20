@@ -34,6 +34,7 @@ const getLayoutForKeys = (keys: string[]) => {
 };
 
 function MissionControlGrid(props: any) {
+  const {analytics} = props;
   const keys = ['1', '2', '3'];
   const layout = getLayoutForKeys(keys);
 
@@ -80,10 +81,19 @@ function MissionControlGrid(props: any) {
       cols={{lg: 12, md: 12, sm: 8, xs: 4}}>
       <div className="m--card" key="1">
         <div className="m--card--title">My Summary</div>
-        {fieldCardRow('TOTAL POINTS', '150')}
+        {fieldCardRow('TOTAL POINTS', String(analytics.totalPoints))}
         {fieldCardRow('RANK', '48')}
-        {fieldCardRow('COMPLETED MISSIONS', '8', '20')}
-        {fieldCardRow('UNEARNED POINTS', '425', undefined, true)}
+        {fieldCardRow(
+          'COMPLETED MISSIONS',
+          String(analytics.numCompletedTasks),
+          '20',
+        )}
+        {fieldCardRow(
+          'UNEARNED POINTS',
+          String(analytics.totalPoints - analytics.completedPoints),
+          undefined,
+          true,
+        )}
       </div>
       <div className="m--card" key="2">
         <div className="m--card--title">Everyone Else</div>
@@ -115,7 +125,7 @@ export default function MissionControlPage(props: any) {
   return (
     <div className="page-base page-content">
       <div className="page--header">Mission Control</div>
-      <MissionControlGrid />
+      <MissionControlGrid analytics={props.analytics} />
     </div>
   );
 }

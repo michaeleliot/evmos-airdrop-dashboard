@@ -15,34 +15,33 @@ export async function getCompletedTasks(address: string): Promise<number[]> {
 
 export async function getLeaderboardData(): Promise<LeaderBoardEntry[]> {
   // TODO Get actual endpoint
-  const res = await axios.get(`${apiDomain}/leaderboard`);
-  const {data}: {data: LeaderboardReturnObject} = res;
-  return data.leaderboard;
-  // return [
-  //   {
-  //     walletAddress: '0x25dd91069f120d955803def92f2d1b32c2b471de',
-  //     points: 560,
-  //   },
-  //   {
-  //     walletAddress: '0x25dd91061f220d955804def92f2d1b32c2b491dc',
-  //     points: 535,
-  //   },
-  //   {
-  //     walletAddress: '0x25dd91069f120d955803def92f2d1b32c2b471de',
-  //     points: 510,
-  //   },
-  //   {
-  //     walletAddress: '0x25dd91061f220d955804def92f2d1b32c2b491dc',
-  //     points: 495,
-  //   },
-  // ];
+  // const res = await axios.get(`${apiDomain}/leaderboard`);
+  // const {data}: {data: LeaderboardReturnObject} = res;
+  // return data.leaderboard;
+  return [
+    {
+      walletAddress: '0x25dd91069f120d955803def92f2d1b32c2b471de',
+      points: 560,
+    },
+    {
+      walletAddress: '0x25dd91061f220d955804def92f2d1b32c2b491dc',
+      points: 535,
+    },
+    {
+      walletAddress: '0x25dd91069f120d955803def92f2d1b32c2b471de',
+      points: 510,
+    },
+    {
+      walletAddress: '0x25dd91061f220d955804def92f2d1b32c2b491dc',
+      points: 495,
+    },
+  ];
 }
 
-export async function getAnalytics(
-  address: string,
+export function getAnalytics(
   completedTasks: number[],
   allTasks: Task[],
-): Promise<object> {
+): object {
   let [completedPoints, totalPoints, numCompletedTasks] = [0, 0, 0];
   allTasks.forEach(task => {
     const {points, id} = task;

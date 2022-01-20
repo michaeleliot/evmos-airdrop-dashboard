@@ -8,15 +8,13 @@ import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 
 import NavigationBar from './components/navigation bar/navigationBar';
 
-import {
-  getCompletedTasks,
-  getLeaderboardData,
-} from './services/missionsService';
-import {getRektDropInformation} from './services/evmos';
+import {getCompletedTasks, getAnalytics} from './services/missionsService';
+import MissionData from './assets/missiondata';
+import {Task} from './types';
 
 function App() {
-  const [page, setPage] = React.useState(0);
-  const [userAddress, setUserAddress] = React.useState('');
+  const [page, setPage] = React.useState(1);
+  const [userAddress, setUserAddress] = React.useState('wallet0');
   const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
 
   const updateKeplrState = (address: string | null): void => {
@@ -30,15 +28,14 @@ function App() {
 
   useEffect(() => {
     if (userAddress) {
-      getCompletedTasks(userAddress).then(tasks => setCompletedTasks(tasks));
-      getLeaderboardData().then(data => {
-        console.log('Leaderboard');
-        console.log(data);
+      getCompletedTasks(userAddress).then(tasks => {
+        setCompletedTasks(tasks);
       });
-      getRektDropInformation(userAddress).then((data: any) => {
-        console.log('Rekt Drop');
-        console.log(data);
-      });
+
+      // getRektDropInformation(userAddress).then((data: any) => {
+      //   console.log('Rekt Drop');
+      //   console.log(data);
+      // });
     }
   }, [userAddress]);
 
@@ -48,7 +45,14 @@ function App() {
     }
 
     if (page === 1) {
-      return <MissionControlPage />;
+      return (
+        <MissionControlPage
+          analytics={getAnalytics(
+            completedTasks,
+            Object.values(MissionData).flatMap(array => array),
+          )}
+        />
+      );
     }
 
     if (page === 2) {
