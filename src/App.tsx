@@ -8,7 +8,11 @@ import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 
 import NavigationBar from './components/navigation bar/navigationBar';
 
-import {getCompletedTasks} from './services/missionsService';
+import {
+  getCompletedTasks,
+  getLeaderboardData,
+} from './services/missionsService';
+import {getRektDropInformation} from './services/evmos';
 
 function App() {
   const [page, setPage] = React.useState(0);
@@ -27,6 +31,14 @@ function App() {
   useEffect(() => {
     if (userAddress) {
       getCompletedTasks(userAddress).then(tasks => setCompletedTasks(tasks));
+      getLeaderboardData().then(data => {
+        console.log('Leaderboard');
+        console.log(data);
+      });
+      getRektDropInformation(userAddress).then((data: any) => {
+        console.log('Rekt Drop');
+        console.log(data);
+      });
     }
   }, [userAddress]);
 
