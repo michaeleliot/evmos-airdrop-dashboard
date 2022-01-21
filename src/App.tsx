@@ -8,9 +8,13 @@ import TestnetMissionsPage from './pages/testnet missions/testnetMissions';
 
 import NavigationBar from './components/navigation bar/navigationBar';
 
-import {getCompletedTasks, getAnalytics} from './services/missionsService';
+import {
+  getCompletedTasks,
+  getAnalytics,
+  getGlobalMissionStats,
+} from './services/missionsService';
 import MissionData from './assets/missiondata';
-import {Claim} from './types';
+import {Claim, GlobalMissionStats} from './types';
 import getRektDropInformation from './services/evmos';
 
 function App() {
@@ -20,6 +24,9 @@ function App() {
   );
   const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
   const [rektDropClaims, setRektDropClaims] = React.useState([] as Claim[]);
+  const [globalMissionStats, setGlobalMissionStats] = React.useState(
+    {} as GlobalMissionStats,
+  );
 
   const updateKeplrState = (address: string | null): void => {
     if (!address) {
@@ -39,6 +46,10 @@ function App() {
       getRektDropInformation(userAddress).then(data => {
         setRektDropClaims(data.claims);
       });
+
+      getGlobalMissionStats(userAddress).then(data => {
+        setGlobalMissionStats(data);
+      });
     }
   }, [userAddress]);
 
@@ -50,10 +61,11 @@ function App() {
     if (page === 1) {
       return (
         <MissionControlPage
-          analytics={getAnalytics(
+          userMissionStats={getAnalytics(
             completedTasks,
             Object.values(MissionData).flatMap(array => array),
           )}
+          globalMissionStats={globalMissionStats}
         />
       );
     }
