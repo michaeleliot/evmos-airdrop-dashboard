@@ -19,9 +19,7 @@ import getRektDropInformation from './services/evmos';
 
 function App() {
   const [page, setPage] = React.useState(1);
-  const [userAddress, setUserAddress] = React.useState(
-    'evmos1qc3xt7vctgwesrlfytve5yja8qcja4tcjkxemy',
-  );
+  const [userAddress, setUserAddress] = React.useState('');
   const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
   const [rektDropClaims, setRektDropClaims] = React.useState([] as Claim[]);
   const [globalMissionStats, setGlobalMissionStats] = React.useState(
