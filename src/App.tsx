@@ -10,12 +10,16 @@ import NavigationBar from './components/navigation bar/navigationBar';
 
 import {getCompletedTasks, getAnalytics} from './services/missionsService';
 import MissionData from './assets/missiondata';
-import {Task} from './types';
+import {Claim} from './types';
+import getRektDropInformation from './services/evmos';
 
 function App() {
   const [page, setPage] = React.useState(1);
-  const [userAddress, setUserAddress] = React.useState('wallet0');
+  const [userAddress, setUserAddress] = React.useState(
+    'evmos1qc3xt7vctgwesrlfytve5yja8qcja4tcjkxemy',
+  );
   const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
+  const [rektDropClaims, setRektDropClaims] = React.useState([] as Claim[]);
 
   const updateKeplrState = (address: string | null): void => {
     if (!address) {
@@ -32,10 +36,9 @@ function App() {
         setCompletedTasks(tasks);
       });
 
-      // getRektDropInformation(userAddress).then((data: any) => {
-      //   console.log('Rekt Drop');
-      //   console.log(data);
-      // });
+      getRektDropInformation(userAddress).then(data => {
+        setRektDropClaims(data.claims);
+      });
     }
   }, [userAddress]);
 
@@ -56,7 +59,7 @@ function App() {
     }
 
     if (page === 2) {
-      return <RektdropRewardsPage />;
+      return <RektdropRewardsPage rektDropClaims={rektDropClaims} />;
     }
 
     if (page === 3) {
