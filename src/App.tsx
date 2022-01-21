@@ -18,7 +18,7 @@ import {Claim, GlobalMissionStats} from './types';
 import getRektDropInformation from './services/evmos';
 
 function App() {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
   const [userAddress, setUserAddress] = React.useState('');
   const [completedTasks, setCompletedTasks] = React.useState([] as number[]);
   const [rektDropClaims, setRektDropClaims] = React.useState([] as Claim[]);
